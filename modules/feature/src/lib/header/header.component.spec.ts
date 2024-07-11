@@ -12,6 +12,7 @@ describe('HeaderComponent', () => {
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
+    component.title = 'Ecommerce';
     fixture.detectChanges();
   });
 
@@ -22,5 +23,9 @@ describe('HeaderComponent', () => {
   it('should contain title', () => {
     const header: HTMLHeadElement = fixture.nativeElement.querySelector('header');
     expect(header.textContent).toContain('Ecommerce');
+
+    component.title = 'Outro título';
+    fixture.detectChanges();
+    expect(header.textContent).toContain('Outro título');
   });
 });
