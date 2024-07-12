@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ecommerce/layout": ["modules/feature/src/index.ts"]
+      "@ecommerce/layout": ["modules/feature/src/index.ts"],
+      "@ecommerce/product-data-access": [
+        "modules/data-acess/product/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
