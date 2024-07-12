@@ -9,7 +9,7 @@ import { Product } from '../../model/product.model';
 export class ProductSearchService {
   // https://65009f9718c34dee0cd53786.mockapi.io/products?name=term
 
-  protected baseUrl = 'https://65009f9718c34dee0cd53786.mockapi.io';
+  readonly baseUrl = 'https://65009f9718c34dee0cd53786.mockapi.io';
 
   constructor(private http: HttpClient) { }
 
