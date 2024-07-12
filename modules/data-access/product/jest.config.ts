@@ -3,7 +3,7 @@ export default {
   displayName: 'product-data-access',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../coverage/modules/data-acess/product',
+  coverageDirectory: '../../../coverage/modules/data-access/product',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
