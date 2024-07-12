@@ -1,21 +1,13 @@
-import { ProductSearchService } from './../../../../../../data-access/product/src/lib/services/product-search/product-search.service';
 import { Component, OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { debounceTime, distinctUntilChanged, filter, map, Observable, of, startWith, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, Observable, startWith, switchMap } from 'rxjs';
+import { ProductSearchService } from '@ecommerce/product-data-access';
+import { Product } from 'modules/data-access/product/src/lib/model/product.model';
 
-export type Product = {
-  createdAt:   string;
-  name:        string;
-  price:       string;
-  description: string;
-  image:       string;
-  id:          string;
-  quantity:    number;
-}
 
 @Component({
   selector: 'lib-product-search',
@@ -45,7 +37,7 @@ export class ProductSearchComponent implements OnInit {
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
-      filter(value => value.length > 3),
+      filter(value => value.length > 2),
       switchMap(value => this.productSearchService.searchByTerm(value)),
     );
   }
