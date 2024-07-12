@@ -17,7 +17,7 @@
     "paths": {
       "@ecommerce/layout": ["modules/feature/src/index.ts"],
       "@ecommerce/product-data-access": [
-        "modules/data-acess/product/src/index.ts"
+        "modules/data-access/product/src/index.ts"
       ],
       "@ecommerce/product-search": [
         "modules/feature/product/search/src/index.ts"

@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HeaderComponent } from '@ecommerce/layout';
+import { ProductSearchComponent } from '@ecommerce/product-search';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
 
@@ -8,7 +12,14 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterTestingModule],
+      imports: [
+        AppComponent, 
+        RouterTestingModule, 
+        HttpClientTestingModule,
+        NoopAnimationsModule,
+        HeaderComponent, 
+        ProductSearchComponent
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
@@ -18,9 +29,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome ecommerce'
-    );
+    expect(compiled.querySelector('h1')?.textContent).toContain('Ecommerce');
   });
 
   it(`should have as title 'ecommerce'`, () => {
