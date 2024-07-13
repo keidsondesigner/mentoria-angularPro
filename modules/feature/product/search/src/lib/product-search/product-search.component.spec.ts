@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ProductSearchComponent } from './product-search.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductSearchService } from '@ecommerce/product-data-access';
@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 describe('ProductSearchComponent', () => {
   let component: ProductSearchComponent;
   let fixture: ComponentFixture<ProductSearchComponent>;
+  let productSearchService: ProductSearchService;
   
   const mockProducts: Product[] = [
     {
@@ -41,6 +42,7 @@ describe('ProductSearchComponent', () => {
       ],
     }).compileComponents();
 
+    productSearchService = TestBed.inject(ProductSearchService);
     fixture = TestBed.createComponent(ProductSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -49,4 +51,15 @@ describe('ProductSearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should debounce when input field is changed', fakeAsync(() => {
+    jest.spyOn(productSearchService, 'searchByTerm');
+    const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
+
+    input.value = 'cotton'; // preenche o campo de busca
+    input.dispatchEvent(new Event('input')); // simula que o usuário dispara um evento de input
+
+    tick(1000);
+    expect(productSearchService.searchByTerm).toHaveBeenCalledWith(input.value);
+  }))
 });
