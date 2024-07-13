@@ -8,6 +8,6 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'home',
-    loadChildren: () => import('@ecommerce/home').then(m => m.HomeComponent)
+    loadChildren: () => import('@ecommerce/home').then(m => m.homeRoutes)
   }
 ];
