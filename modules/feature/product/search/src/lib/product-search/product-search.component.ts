@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { debounceTime, distinctUntilChanged, filter, Observable, startWith, switchMap } from 'rxjs';
 import { ProductSearchService } from '@ecommerce/product-data-access';
 import { Product } from 'modules/data-access/product/src/lib/model/product.model';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { Product } from 'modules/data-access/product/src/lib/model/product.model
     ReactiveFormsModule,
     NgFor,
     AsyncPipe,
+    RouterModule
   ],
   templateUrl: './product-search.component.html',
   styleUrl: './product-search.component.scss',
