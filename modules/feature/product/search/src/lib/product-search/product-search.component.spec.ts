@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, flush, tick  } from '@angular/core/testing';
 import { ProductSearchComponent } from './product-search.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductSearchService } from '@ecommerce/product-data-access';
@@ -59,23 +59,15 @@ describe('ProductSearchComponent', () => {
   });
 
   it('should debounce when input field is changed', fakeAsync(() => {
-    const searchSpy = jest.spyOn(productSearchService, 'searchByTerm'); // ouvindo o método de busca
+    jest.spyOn(productSearchService, 'searchByTerm'); // ouvindo o método de busca
     
     const input: HTMLInputElement = fixture.nativeElement.querySelector('input'); // seleciona o campo de busca
     input.value = 'cotton'; // preenche o campo de busca
+    input.dispatchEvent(new Event('input')); // disparar um evento de input
 
-    // Atualizar o valor do controle de formulário
-    component.searchControl.setValue(input.value);
     fixture.detectChanges();
-  
-    // disparar um evento de input
-    const inputEvent = new Event('input', { bubbles: true });
-    input.dispatchEvent(inputEvent);
-    fixture.detectChanges();
+    tick(10000);
 
-    tick(20000);
-    fixture.detectChanges();
-
-    expect(searchSpy).toHaveBeenCalledWith('cotton');
+    expect(productSearchService.searchByTerm).toHaveBeenCalledWith('cotton');
   }))
 });
