@@ -1,1 +1,5 @@
-<p>{{ id$ | async }}</p>
+<ng-container *ngIf="product$ | async as product">
+  <h1>{{ product.name }}</h1>
+  <p>{{ product.id }}</p>
+  <p>{{ product.description }}</p>
+</ng-container>

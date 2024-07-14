@@ -2,7 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
+import { ProductSearchService } from '@ecommerce/product-data-access';
+import { Product } from 'modules/data-access/product/src/lib/model/product.model';
 
 @Component({
   selector: 'lib-product-detail',
@@ -11,15 +13,16 @@ import { map, Observable } from 'rxjs';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent {
 
-  id$!: Observable<string>;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productSearchService: ProductSearchService
+  ) { }
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  product$: Observable<Product> = this.activatedRoute.params.pipe(
+    map(params => params['id']), // Pegando id da rota
+    switchMap(id => this.productSearchService.getById(id)) // Buscando pelo id
+  )
 
-  ngOnInit() {
-    this.id$ = this.activatedRoute.params.pipe(
-      map(params => params['id'])
-    )
-  }
 }
