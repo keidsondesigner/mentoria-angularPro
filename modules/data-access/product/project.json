@@ -4,7 +4,7 @@
   "sourceRoot": "modules/data-access/product/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
+  "tags": ["data-access"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
