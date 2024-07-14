@@ -18,4 +18,8 @@ export class ProductSearchService {
       params: { name: term }
     });
   }
+
+  getById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.baseUrl}/products/${id}`);
+  }
 }
