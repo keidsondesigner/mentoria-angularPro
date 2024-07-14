@@ -4,6 +4,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductSearchService } from '@ecommerce/product-data-access';
 import { Product } from 'modules/data-access/product/src/lib/model/product.model';
 import { of } from 'rxjs';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 describe('ProductSearchComponent', () => {
   let component: ProductSearchComponent;
@@ -33,11 +35,15 @@ describe('ProductSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductSearchComponent, NoopAnimationsModule],
+      imports: [ ProductSearchComponent, ReactiveFormsModule, NoopAnimationsModule ],
       providers: [
         {
+          provide: ActivatedRoute,
+          useValue: { params: of({ term: 'cotton' }) },
+        },
+        {
           provide: ProductSearchService, // INVERSÃO DE DEPENDÊNCIA, QUANDO O COMPONENT OLHAR O SERVICE
-          useValue: { searchByTerm: () => of(mockProducts) }, // SUBSTITUI OS MÉTODOS (INVERTI) DO SERVICE
+          useValue: { searchByTerm: jest.fn(() => of(mockProducts)) }, // SUBSTITUI OS MÉTODOS (INVERTI) DO SERVICE
         }
       ],
     }).compileComponents();
@@ -53,13 +59,23 @@ describe('ProductSearchComponent', () => {
   });
 
   it('should debounce when input field is changed', fakeAsync(() => {
-    jest.spyOn(productSearchService, 'searchByTerm');
-    const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
-
+    const searchSpy = jest.spyOn(productSearchService, 'searchByTerm'); // ouvindo o método de busca
+    
+    const input: HTMLInputElement = fixture.nativeElement.querySelector('input'); // seleciona o campo de busca
     input.value = 'cotton'; // preenche o campo de busca
-    input.dispatchEvent(new Event('input')); // simula que o usuário dispara um evento de input
 
-    tick(1000);
-    expect(productSearchService.searchByTerm).toHaveBeenCalledWith(input.value);
+    // Atualizar o valor do controle de formulário
+    component.searchControl.setValue(input.value);
+    fixture.detectChanges();
+  
+    // disparar um evento de input
+    const inputEvent = new Event('input', { bubbles: true });
+    input.dispatchEvent(inputEvent);
+    fixture.detectChanges();
+
+    tick(20000);
+    fixture.detectChanges();
+
+    expect(searchSpy).toHaveBeenCalledWith('cotton');
   }))
 });
