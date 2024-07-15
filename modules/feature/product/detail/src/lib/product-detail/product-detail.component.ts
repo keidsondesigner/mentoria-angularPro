@@ -7,11 +7,12 @@ import { ProductSearchService } from '@ecommerce/product-data-access';
 import { Product } from 'modules/data-access/product/src/lib/model/product.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { QuantityDescriptionPipe } from '../pipes/quantity-description/quantity-description.pipe';
 
 @Component({
   selector: 'lib-product-detail',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, QuantityDescriptionPipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
 })
