@@ -1,0 +1,10 @@
+.product-detail__section {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.product-detail__info {
+  max-width: 400px;
+}

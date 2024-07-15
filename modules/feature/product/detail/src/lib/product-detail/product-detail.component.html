@@ -1,5 +1,21 @@
-<ng-container *ngIf="product$ | async as product">
-  <h1>{{ product.name }}</h1>
-  <p>{{ product.id }}</p>
-  <p>{{ product.description }}</p>
-</ng-container>
+<main class="product-detail">
+  <section class="product-detail__section">
+    <ng-container *ngIf="product$ | async as product">
+      <mat-card class="product-detail__info">
+        <img mat-card-image [src]="product.image" [alt]="product.description" />
+        <mat-card-content>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ product.price | currency : 'BRL' }}
+          </mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+      <div class="product-detail__actions">
+        <p>Descrição do produto: {{ product.description }}</p>
+        <!-- <p>Id: {{ product.id }}</p> -->
+        <p>{{ product.quantity | quantityDescription }}</p>
+        <button mat-flat-button>Adicionar ao carrinho</button>
+      </div>
+    </ng-container>
+  </section>
+</main>
