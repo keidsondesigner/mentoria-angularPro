@@ -14,7 +14,7 @@
         <p>Descrição do produto: {{ product.description }}</p>
         <!-- <p>Id: {{ product.id }}</p> -->
         <p>{{ product.quantity | quantityDescription }}</p>
-        <button mat-flat-button>Adicionar ao carrinho</button>
+        <button mat-flat-button (click)="cartService.addToCart(product) ">Adicionar ao carrinho</button>
       </div>
     </ng-container>
   </section>
