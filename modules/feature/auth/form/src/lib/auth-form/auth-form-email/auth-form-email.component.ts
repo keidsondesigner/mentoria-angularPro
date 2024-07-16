@@ -6,11 +6,18 @@ import { AuthFormComponent } from './../auth-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lib-auth-form-email',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatInputModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    MatButtonModule, 
+    MatInputModule, 
+    ReactiveFormsModule,
+    RouterModule
+  ],
   templateUrl: './auth-form-email.component.html',
   styleUrl: './auth-form-email.component.scss',
 })
