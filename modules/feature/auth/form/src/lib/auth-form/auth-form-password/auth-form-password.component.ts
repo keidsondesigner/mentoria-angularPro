@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable @nx/enforce-module-boundaries */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -14,7 +14,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './auth-form-password.component.html',
   styleUrl: './auth-form-password.component.scss',
 })
-export class AuthFormPasswordComponent {
+export class AuthFormPasswordComponent implements OnInit {
 
   passwordFormControl!: FormControl<string | null>;
 
@@ -24,6 +24,6 @@ export class AuthFormPasswordComponent {
   ngOnInit() {
     console.log(this.authFormComponent.form.value);
 
-    this.passwordFormControl = this.authFormComponent.form.controls.email
+    this.passwordFormControl = this.authFormComponent.form.controls.password
   }
 }
