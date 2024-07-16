@@ -2,11 +2,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'lib-auth-form',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, MatCardModule],
   templateUrl: './auth-form.component.html',
   styleUrl: './auth-form.component.scss',
 })
