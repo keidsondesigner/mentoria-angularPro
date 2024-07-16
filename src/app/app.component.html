@@ -1,5 +1,5 @@
 <lib-header title="Ecommerce">
   <lib-product-search></lib-product-search>
-  <a right>Login</a>
+  <app-cart [quantity]="cartService.productQuantity$ | async" right></app-cart>
 </lib-header>
 <router-outlet></router-outlet>

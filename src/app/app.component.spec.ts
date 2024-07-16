@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
@@ -5,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HeaderComponent } from '@ecommerce/layout';
 import { ProductSearchComponent } from '@ecommerce/product-search';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CartComponent } from 'modules/ui/product/src/components/cart/cart.component';
 
 describe('AppComponent', () => {
 
@@ -18,7 +20,8 @@ describe('AppComponent', () => {
         HttpClientTestingModule,
         NoopAnimationsModule,
         HeaderComponent, 
-        ProductSearchComponent
+        ProductSearchComponent,
+        CartComponent
       ],
     }).compileComponents();
 
