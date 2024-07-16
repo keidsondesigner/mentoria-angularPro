@@ -1,1 +1,21 @@
-<p>auth-form-email works!</p>
+<mat-form-field appearance="outline" class="form-field">
+  <mat-label>Informe seu email</mat-label>
+  <input [formControl]="emailFormControl" matInput placeholder="Ex: seu-email@gmail.com" type="email" />
+  <mat-error data-testid="email-error" *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+    Entre com um email válido
+  </mat-error>
+  <mat-error data-testid="required-error" *ngIf="emailFormControl.hasError('required')">
+    Email é <strong>obrigatório</strong>
+  </mat-error>
+</mat-form-field>
+
+<div class="container">
+  <button 
+    [disabled]="emailFormControl.invalid" 
+    [routerLink]="['../', 'password']" 
+    mat-button 
+    color="primary" 
+  >
+    Próximo
+  </button>
+</div>
